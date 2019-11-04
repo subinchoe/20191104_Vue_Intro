@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<!-- javascript -->
+  <input id="js-input" type="text">
+  <p id="js-p"></p>
+
+<!-- Vue 살짝 다루기 -->
+  <!-- {{message}} -->
+  <!-- 위에 있는 message는 element인 #app에 해당이 안되기 때문에 HTMLpage에 {{message}}라고 그대로 뜬다. -->
+
+  <!-- <div id="app"> -->
+    <!-- {{message}} -->
+    <!-- id 안에 {{아래 설정한 변수 이름}}을 적어주면 "Hello, Vue!"가 HTMLpage에 뜬다. -->
+  <!-- </div> -->
+
+  <div id="app">
+    <input id="vue-input" type="text" v-model="msg">
+    <!-- v-model은 즉각 반영됨 -->
+    <p id="vue-p">{{msg}}</p>
+  </div>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+  // Vue 살짝 다루기
+    // 매우 중요!! app.message = "Bye, Vue!"라고 저장하는 순간 HTML에서도 "Bye, Vue!"라고 출력된다.
+    //const app = new Vue({
+      //el: '#app', // el은 element의 준말, id가 app인 친구랑 연결해!
+      //data: { // data는 object!
+        //message: 'Hello, Vue!!', // message는 변수 이름!
+        //msg : ""
+      //} // 콘솔 창에 접근할 때, app.message를 치면 "Hello, Vue!"가 뜸.
+    //})
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        msg : ""
+      }
+    })
+
+
+
+  // Javascript
+    // id가 js-input인 input 태그에 글자가 써지면
+    // p 태그 안에 글자가 출력되게끔 만들자.
+    const jsInput = document.querySelector("#js-input")
+    jsInput.addEventListener('keydown', ()=>{
+      const jsP = document.querySelector("#js-p")
+      jsP.innerText = jsInput.value
+    })
+    
+  
+
+
+
+  </script>
+</body>
+</html>

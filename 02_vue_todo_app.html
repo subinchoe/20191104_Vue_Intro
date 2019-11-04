@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .completed {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div v-bind:style="{color: color, fontSize: fontSize + 'px'}">
+
+    </div>
+    <!-- input태그만 양방향 바인딩이 가능???? -->
+    <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+    <button v-on:click="addTodo"> + </button>
+    <button v-on:click="clearCompleted">완료항목삭제</button>
+    <!-- event를 추가하기 : v-on:click="todo.completed = true" 이렇게 설정하면, 완료되지 않은 값을 눌렀을 때
+      true가 되며 완료가 됨을 표시한다. -->
+      <!-- <li v-for="todo in todos" v-if="!todo.completed" v-on:click="check(todo)"> -->
+        <!-- v-if="!todo.completed"는 false값을 가진 아이들만 출력! 반대로 !를 없애면 true값을 가진 애만 출력 -->
+        <!-- v-for 먼저 돌고 v-if가 나중에 돌며 같이 쓰는 것을 권장하지 않기 때문에 되도록 같이 쓰지 말 것! -->
+        <!-- {{todo.title}} -->
+       <!-- {{todo.completed}} -->
+    <!-- </li> -->
+    <!-- <li v-else="" v-on:click="check(todo)">
+      {{todo.title}} >> 완료!!
+    </li> -->
+    <li v-for="todo in todos" v-bind:class="{completed: todo.completed}">
+      <input type="checkbox" v-model="todo.completed">
+      {{todo.title}}
+    </li>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        // color: 'red',
+        // fontSize: 30,
+        newTodo: '',
+        todos: [
+          {
+            title: '점심먹기',
+            completed: true,
+          },
+          {
+            title: '뷰 공부하기',
+            completed: false,
+          },
+          {
+            title: '파이썬 공부하기',
+            completed: true,
+
+          },
+          {
+            title: '낮잠자기',
+            completed: false,
+
+          },
+          // '점심먹기', //이건 그냥 스트링 집어 넣었는데 위의 방법은 배열 안에 오브젝트({})를 만들어서 내용을 넣어줌.
+          // '뷰 공부하기',
+          // '파이썬 공부하기',
+          // '낮잠자기',
+          // 데이터를 추가하고 싶다면 app.todos.push('넣고 싶은 내용')
+        ],
+      },
+      methods: {
+        check: function(todo){
+          todo.completed = !todo.completed
+        },
+        addTodo(){
+          console.log(this.newTodo)
+          this.todos.push({
+            title: this.newTodo,
+            completed: false,
+          })
+          this.newTodo = ""
+        },
+        clearCompleted(){
+          const notCompletedTodos = this.todos.filter((todo)=>{
+            return todo.completed === false
+          })
+          this.todos = notCompletedTodos
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{message}} - {{count}}
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        // app.$el el에 접근할 때!
+        el: '#app',
+        // app.$data data에 접근할 때!
+        data: {
+          message: "Hello, Vue",
+          count: 0,
+        },
+        // methods는 함수들이 들어가는 구조!
+        methods: {
+          // console창에 app.plus만 치는게 아니고, app.plus()까지!!!!!!
+          plus: function(){
+            //console.log(this) // app을 출력한 것과 같다.
+            this.count++
+          },
+          //plus2: ()=>{
+          //  console.log(this)
+          //}, 
+          minus(){
+            // key와 value가 똑같을 때!! 예를 들어 minus: function minus(){}같은 경우
+            this.count--
+          }
+        }
+      })
+    </script>
+</body>
+</html>
