@@ -10,6 +10,8 @@
   <div id="app">
     <h1> subin's Todo App </h1>
     <!-- component의 이름('todo-list')을 태그처럼 불러온다. -->
+    <todo-list></todo-list>
+    <todo-list></todo-list> 
     <todo-list></todo-list> 
   </div>
 
@@ -27,8 +29,29 @@
           </li>
         </div>
       `, // template은 하나로 묶여있어야 한다. 그래서 div로 묶었다.
-      data: {},
-      methods: {},
+      data: function(){
+        return {
+          todos: [],
+          newTodo: '',
+        }
+      },
+      methods: {
+        addTodo: function(e) {
+          if (this.newTodo.length != 0) {
+            this.todos.push({
+              id: Date.now(),
+              content: this.newTodo,
+              completed: false,
+            })
+            this.newTodo = ''
+          }
+        },
+        removeTodo: function(todoID) {
+          this.todos = this.todos.filter(todo => {
+            return todo.id !== todoID
+          })
+        }  
+      },
     })
   </script>
 
