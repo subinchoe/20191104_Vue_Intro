@@ -9,13 +9,24 @@
 <body>
   <div id="app">
     <h1> subin's Todo App </h1>
+    <!-- component의 이름('todo-list')을 태그처럼 불러온다. -->
+    <todo-list></todo-list> 
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
   <script>
     Vue.component('todo-list', {
-      template: '',
+      template: `
+        <div class="todo-list">
+          <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+          <button v-on:click="addTodo">+</button>
+          <li v-for="todo in todos" v-bind:key="todo.id">
+            <span>{{ todo.content }}</span>
+            <button v-on:click="removeTodo(todo.id)">x</button>
+          </li>
+        </div>
+      `, // template은 하나로 묶여있어야 한다. 그래서 div로 묶었다.
       data: {},
       methods: {},
     })
