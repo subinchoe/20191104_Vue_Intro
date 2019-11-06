@@ -10,13 +10,15 @@
   <div id="app">
     <h1> subin's Todo App </h1>
     <!-- component의 이름('todo-list')을 태그처럼 불러온다. -->
-    <todo-list category="취업"></todo-list>
+    <!-- <todo-list category="취업"></todo-list>
     <todo-list category="싸피"></todo-list> 
-    <todo-list category="쇼핑"></todo-list> 
+    <todo-list category="쇼핑"></todo-list> -->
+    <todo-card v-for="title in titles" v-bind:title="title" content="반갑습니다."></todo-card>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
+  <!-- todo-list component 시작 -->
   <script>
     Vue.component('todo-list', {
       template: `
@@ -56,10 +58,53 @@
       },
     })
   </script>
+  <!-- todo-list component 끝 -->
+
+  <!-- todo-card component 시작 -->
+  <script>
+    Vue.component('todo-card', {
+      template:`
+        <div>
+          <h1>{{title}}</h1>
+          <h2>{{content}}</h2>
+        </div>
+      `,
+      data: function(){
+        return {
+
+        }
+      },
+      methods: {
+
+      },
+      props: {
+        title: {
+          type: String,
+          required: true,
+          validator: function(input){
+            if (input.length < 5) {
+              return false
+            }
+            return true
+          },
+        },
+        content: String,
+      },
+    })
+  </script>
+  <!-- todo-card component 끝 -->
 
   <script>
     const app = new Vue({
       el: '#app',
+      data: {
+        titles: [
+          '안녕하세요오',
+          '하이이이이이',
+          'hello!!!!',
+          'vue'
+        ]
+      },
     })
   </script>
 </body>
