@@ -17,82 +17,8 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-  <!-- todo-list component 시작 -->
-  <script>
-    Vue.component('todo-list', {
-      template: `
-        <div class="todo-list">
-          <h3>{{category}}</h3>
-          <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
-          <button v-on:click="addTodo">+</button>
-          <li v-for="todo in todos" v-bind:key="todo.id">
-            <span>{{ todo.content }}</span>
-            <button v-on:click="removeTodo(todo.id)">x</button>
-          </li>
-        </div>
-      `, // template은 하나로 묶여있어야 한다. 그래서 div로 묶었다.
-      props: ['category'],
-      data: function(){
-        return {
-          todos: [],
-          newTodo: '',
-        }
-      },
-      methods: {
-        addTodo: function(e) {
-          if (this.newTodo.length != 0) {
-            this.todos.push({
-              id: Date.now(),
-              content: this.newTodo,
-              completed: false,
-            })
-            this.newTodo = ''
-          }
-        },
-        removeTodo: function(todoID) {
-          this.todos = this.todos.filter(todo => {
-            return todo.id !== todoID
-          })
-        }  
-      },
-    })
-  </script>
-  <!-- todo-list component 끝 -->
-
-  <!-- todo-card component 시작 -->
-  <script>
-    Vue.component('todo-card', {
-      template:`
-        <div>
-          <h1>{{title}}</h1>
-          <h2>{{content}}</h2>
-        </div>
-      `,
-      data: function(){
-        return {
-
-        }
-      },
-      methods: {
-
-      },
-      props: {
-        title: {
-          type: String,
-          required: true,
-          validator: function(input){
-            if (input.length < 5) {
-              return false
-            }
-            return true
-          },
-        },
-        content: String,
-      },
-    })
-  </script>
-  <!-- todo-card component 끝 -->
+  <script src="./todoList.js"></script>
+  <script src="./todoCard.js"></script>
 
   <script>
     const app = new Vue({
